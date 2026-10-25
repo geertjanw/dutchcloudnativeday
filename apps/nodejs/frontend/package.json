@@ -1,0 +1,24 @@
+{
+  "name": "registration-web-node",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Frontend web UI for the Dutch Cloud Native Day registration workshop",
+  "main": "server.js",
+  "scripts": {
+    "start": "node -r ./tracing.js server.js"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/api-logs": "^0.205.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.60.1",
+    "@opentelemetry/exporter-logs-otlp-proto": "^0.205.0",
+    "@opentelemetry/exporter-metrics-otlp-proto": "^0.205.0",
+    "@opentelemetry/exporter-trace-otlp-proto": "^0.205.0",
+    "@opentelemetry/resources": "^2.1.0",
+    "@opentelemetry/sdk-logs": "^0.205.0",
+    "@opentelemetry/sdk-metrics": "^2.1.0",
+    "@opentelemetry/sdk-node": "^0.205.0",
+    "@opentelemetry/semantic-conventions": "^1.37.0",
+    "express": "^4.21.2"
+  }
+}
