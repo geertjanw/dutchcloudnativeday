@@ -39,11 +39,13 @@ terms.
 
 1. In the Dash0 app, go to **Settings → Auth Tokens** and create a token. It
    looks like `auth_...`.
-   ![Dash0 Auth Tokens settings](images/general/auth-token.png)
+   <img src="images/general/auth-token.png" alt="Dash0 Auth Tokens settings" width="500">
+
 2. Go to the **Settings → Endpoints → OTLP via gRPC** to find your fully-resolved
    OTLP ingress endpoint (it's region-specific, e.g.
    `https://ingress.eu-west-1.aws.dash0.com`).
-   ![Dash0 OTLP endpoint settings](images/general/endpoint.png)
+   <img src="images/general/endpoint.png" alt="Dash0 OTLP endpoint settings" width="500">
+
 3. Copy the template and paste both values in:
 
    ```bash
