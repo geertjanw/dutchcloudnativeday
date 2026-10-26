@@ -100,9 +100,16 @@ side by side.
 
 ## 3. See it in Dash0
 
-Open the running app's frontend in your browser (e.g. `http://localhost:3000`),
-fill in the registration form, and click submit once. That single submission
-sends a request from the frontend to the backend and generates the telemetry.
+The app you ran is **two local services** on your own machine: a **frontend**
+(serves the form, e.g. `http://localhost:3000`) and a **backend** (the API that
+validates and saves the registration). **Dash0 is separate** — it's the
+observability platform both services export their telemetry to, where you'll
+view it.
+
+Open the frontend in your browser, fill in the registration form, and click
+submit once. That single submission sends a request from your frontend service
+to your backend service, and both services send the resulting telemetry up to
+Dash0.
 
 Then look in Dash0 for the two service names of the app you ran (e.g.
 `registration-web-node` and `registration-api-node`). Open a trace and
