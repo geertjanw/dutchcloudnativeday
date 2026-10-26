@@ -39,12 +39,12 @@ terms.
 
 1. In the Dash0 app, go to **Settings → Auth Tokens** and create a token or use 
 the **Auto-generated auth token**. It looks like `auth_...`.
-   <p><img src="images/general/auth-token-v2.png" alt="Dash0 Auth Tokens settings" width="500"></p>
+   <p><img src="images/general/auth-token-v2.png" alt="Dash0 Auth Tokens settings" width="900"></p>
 
 2. Go to the **Settings → Endpoints → OTLP via gRPC** to find your fully-resolved
    OTLP ingress endpoint (it's region-specific, e.g.
    `https://ingress.eu-west-1.aws.dash0.com`).
-   <p><img src="images/general/endpoint-v2.png" alt="Dash0 OTLP endpoint settings" width="500"></p>
+   <p><img src="images/general/endpoint-v2.png" alt="Dash0 OTLP endpoint settings" width="900"></p>
 
 3. Copy the template and paste both values in:
 
@@ -100,8 +100,12 @@ side by side.
 
 ## 3. See it in Dash0
 
-After you register once, look in Dash0 for the two service names of the app you
-ran (e.g. `registration-web-node` and `registration-api-node`). Open a trace and
+Open the running app's frontend in your browser (e.g. `http://localhost:3000`),
+fill in the registration form, and click submit once. That single submission
+sends a request from the frontend to the backend and generates the telemetry.
+
+Then look in Dash0 for the two service names of the app you ran (e.g.
+`registration-web-node` and `registration-api-node`). Open a trace and
 you'll see the request flow from the web service into the API, with child spans
 for `validate-registration`, `save-registration`, and `send-confirmation-email`.
 
