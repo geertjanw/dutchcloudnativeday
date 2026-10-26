@@ -50,7 +50,36 @@ terms.
 
    ```bash
    cp .env.example .env
-   # edit .env: set the endpoint and the auth token
+   ```
+
+   This is the full [`.env.example`](.env.example). Edit your `.env` and set:
+
+   - `OTEL_EXPORTER_OTLP_ENDPOINT` → your OTLP ingress endpoint from step 2.
+   - `DASH0_AUTH_TOKEN` → the `auth_...` token from step 1 (replace `auth_REPLACE_ME`).
+   - `DASH0_DATASET` → leave as `default` unless you target a different dataset.
+
+   ```bash
+   # Dash0 credentials — shared by every app in this repo.
+   # Copy this file to `.env` and fill in the values from your Dash0 org.
+   #
+   #   cp .env.example .env
+   #
+   # 1) Auth token:  Dash0 app → Settings → Auth Tokens → create a token (auth_...).
+   # 2) OTLP endpoint: Dash0 app → Integration Hub → "OpenTelemetry" shows your
+   #    fully-resolved ingress URL (region-specific), e.g.
+   #    https://ingress.eu-west-1.aws.dash0.com
+   #
+   # Each app reads these via its run.sh. Node/Python/Go set the OTLP auth headers
+   # in code from DASH0_AUTH_TOKEN/DASH0_DATASET (robust across SDKs); the Java
+   # agent builds OTEL_EXPORTER_OTLP_HEADERS from them in its run.sh.
+
+   # Standard OpenTelemetry OTLP settings (vendor-neutral):
+   OTEL_EXPORTER_OTLP_ENDPOINT=https://ingress.eu-west-1.aws.dash0.com
+   OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+
+   # Your Dash0 token and target dataset ("default" is auto-created):
+   DASH0_AUTH_TOKEN=auth_REPLACE_ME
+   DASH0_DATASET=default
    ```
 
 All four apps read this same root `.env`. You only do this once.
