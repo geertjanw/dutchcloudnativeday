@@ -33,11 +33,14 @@ cp .env.example .env
 Then edit `.env`:
 
 - **Auth token** — Dash0 app → **Settings → Auth Tokens** → create a token
-  (`auth_...`). Put it in `DASH0_AUTH_TOKEN`.
-- **OTLP endpoint** — Dash0 app → **Integration Hub → OpenTelemetry** shows your
-  fully-resolved, region-specific ingress URL, e.g.
+  (`auth_...`), or use the **Auto-generated auth token**. Put it in
+  `DASH0_AUTH_TOKEN`.
+  <p><img src="../../images/general/auth-token-v2.png" alt="Dash0 Auth Tokens settings" width="900"></p>
+- **OTLP endpoint** — Dash0 app → **Settings → Endpoints → OTLP via gRPC** shows
+  your fully-resolved, region-specific ingress URL, e.g.
   `https://ingress.eu-west-1.aws.dash0.com`. Put it in
   `OTEL_EXPORTER_OTLP_ENDPOINT`.
+  <p><img src="../../images/general/endpoint-v2.png" alt="Dash0 OTLP endpoint settings" width="900"></p>
 - `DASH0_DATASET` — leave as `default` unless you created another dataset.
 - `OTEL_EXPORTER_OTLP_PROTOCOL` stays `http/protobuf`.
 

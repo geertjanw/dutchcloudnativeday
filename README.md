@@ -111,6 +111,16 @@ submit once. That single submission sends a request from your frontend service
 to your backend service, and both services send the resulting telemetry up to
 Dash0.
 
+**How that telemetry reaches Dash0:** each service starts with the OpenTelemetry
+SDK/agent loaded (Node `-r ./tracing.js`, Python `otel_setup.py`, the Go SDK, or
+the Java agent). As requests run, the SDK records spans, metrics, and logs and
+its **OTLP exporter** batches them and pushes them over OTLP (`http/protobuf`)
+straight to the `OTEL_EXPORTER_OTLP_ENDPOINT` you configured, attaching your
+`Authorization: Bearer <token>` and `Dash0-Dataset` headers. The frontend and
+backend are each configured independently (every `run.sh` sources the same root
+`.env`), so each exports its own telemetry directly to Dash0 — there's no local
+collector in between.
+
 Then look in Dash0 for the two service names of the app you ran (e.g.
 `registration-web-node` and `registration-api-node`). Open a trace and
 you'll see the request flow from the web service into the API, with child spans
