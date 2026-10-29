@@ -3,7 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 # Load the shared root .env (repo-root/.env; this service lives at apps/java/backend).
-set -a; source ../../../.env; set +a
+source ../../../scripts/load-env.sh
 
 # Java uses the javaagent (no app code), so build the OTLP auth headers here.
 export OTEL_EXPORTER_OTLP_HEADERS="Authorization=Bearer ${DASH0_AUTH_TOKEN},Dash0-Dataset=${DASH0_DATASET}"
