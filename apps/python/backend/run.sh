@@ -3,7 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 # Load shared Dash0 / OTLP settings from the repo-root .env.
-set -a; source ../../../.env; set +a
+source ../../../scripts/load-env.sh
 
 # Activate this service's isolated virtualenv.
 source venv/bin/activate

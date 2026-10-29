@@ -43,10 +43,14 @@ terms.
 the **Auto-generated auth token**. It looks like `auth_...`.
    <p><img src="images/general/auth-token-v2.png" alt="Dash0 Auth Tokens settings" width="900"></p>
 
-3. Go to the **Settings → Endpoints → OTLP via gRPC** to find your fully-resolved
+3. Go to **Settings → Endpoints → OTLP via HTTP** to find your fully-resolved
    OTLP ingress endpoint (it's region-specific, e.g.
-   `https://ingress.eu-west-1.aws.dash0.com`).
-   <p><img src="images/general/endpoint-v2.png" alt="Dash0 OTLP endpoint settings" width="900"></p>
+   `https://ingress.eu-west-1.aws.dash0.com`). Use the **HTTP** endpoint, not
+   gRPC: the apps export with `OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf`, so a
+   URL that carries a port must use `:4318` — never `:4317` (that's the gRPC
+   port and the collector rejects HTTP on it with `HTTP 415`). A URL with no
+   port is fine; it defaults to 443.
+   <p><img src="images/general/endpoint-v2a.png" alt="Dash0 OTLP endpoint settings" width="900"></p>
 
 4. Copy the template and paste both values in:
 
@@ -67,9 +71,12 @@ the **Auto-generated auth token**. It looks like `auth_...`.
    #   cp .env.example .env
    #
    # 1) Auth token:  Dash0 app → Settings → Auth Tokens → create a token (auth_...).
-   # 2) OTLP endpoint: Dash0 app → Integration Hub → "OpenTelemetry" shows your
+   # 2) OTLP endpoint: Dash0 app → Settings → Endpoints → "OTLP via HTTP" shows your
    #    fully-resolved ingress URL (region-specific), e.g.
    #    https://ingress.eu-west-1.aws.dash0.com
+   #    The protocol below is http/protobuf, so use the HTTP endpoint: if the URL
+   #    carries a port it must be :4318, never :4317 (gRPC → HTTP 415). No port is
+   #    fine (defaults to 443). run.sh auto-corrects a stray :4317 and warns you.
    #
    # Each app reads these via its run.sh. Node/Python/Go set the OTLP auth headers
    # in code from DASH0_AUTH_TOKEN/DASH0_DATASET (robust across SDKs); the Java
